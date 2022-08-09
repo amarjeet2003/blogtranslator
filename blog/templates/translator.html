@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <form action="{% url 'translator_view' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-6 mt-3 left">
+                <textarea class="form-control" rows="3" name="my_textarea">{{original_text}}</textarea>
+            </div>
+          <select class="form-select" aria-label="Default select example" name="language">
+            <option selected>Choose Language</option>
+              {% for lang_code, lang_name in available_langs.items %}
+                <option value="{{lang_code}}">{{lang_name|capfirst}}</option>
+              {% endfor %}
+            </select>
+            <div class="col-sm-6 mt-3 left">
+                <textarea class="form-control" rows="3">{{output_text}}</textarea>
+                <input class="btn btn-primary ml-3 mt-3" type="submit" value="Submit">
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+
+{% endblock content %}
